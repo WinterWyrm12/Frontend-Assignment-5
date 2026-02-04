@@ -7,17 +7,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
     margin: 0;
+    height: 50%;
+    color: black;
 }
 
 .nav-menu {
     display: flex;
-    gap: 30px;
+    gap: 20px;
+    height: 50%;
+    width: 100%;
 }
 
 .nav-link {
@@ -40,4 +45,5 @@
     padding: 8px 16px;
     border-radius: 100%;
     cursor: pointer;
+    margin: auto;
 }

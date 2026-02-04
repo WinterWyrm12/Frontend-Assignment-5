@@ -1,0 +1,32 @@
+/* CSS code generated with AI (ChatGPT) */
+
+/* Overall page wrapper */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Welcome / intro section */
+.welcome {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  padding: 30px 20px;
+  text-align: center;
+  background-color: wheat;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Section heading */
+.welcome h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+/* Section text */
+.welcome p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}

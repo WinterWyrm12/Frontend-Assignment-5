@@ -1,0 +1,33 @@
+/* CSS code generated with AI (ChatGPT) */
+
+/* Page title */
+h2 {
+  text-align: center;
+  font-size: 32px;
+  margin: 30px 0 20px;
+}
+
+/* Wrapper for all cart content */
+.cart-items {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Empty cart message */
+.empty-text {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 40px;
+}
+
+/* Total text at bottom */
+.total-text {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 24px;
+  border-top: 2px solid #ddd;
+  padding-top: 16px;
+}

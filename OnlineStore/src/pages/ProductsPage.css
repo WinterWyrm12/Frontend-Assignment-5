@@ -1,0 +1,21 @@
+/* CSS code generated with AI (ChatGPT) */
+
+/* Page title */
+h2 {
+  text-align: center;
+  font-size: 32px;
+  margin: 30px 0 20px;
+}
+
+/* Product card spacing */
+.product-card {
+  margin: 0 auto 24px;
+  width: 60%;
+}
+
+/* Responsive tweak */
+@media (max-width: 768px) {
+  .product-card {
+    width: 90%;
+  }
+}

@@ -1,68 +1,84 @@
 import './App.css';
-import { useState } from 'react';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import CartItem from './components/CartItem';
+import {useEffect, useState} from 'react';
 
+// Pages
+import HomePage from './pages/HomePage';
+import CartPage from './pages/CartPage';
+import ProductsPage from './pages/ProductsPage';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import ProductDetailPage from './pages/ProductDetailPage';
+import { use } from 'react';
 
-/* for list of items in cart
- <h2>Cart Items:</h2>
-      <ul>
-          {cart.map((item, index) => (
-          <li key={index}>{item.name} - ${item.price}</li>
-          ))}
-        </ul>
- */
+const defaultProducts = [
+  { 
+    id: 1, 
+    name: "Apple", 
+    price: 1.99, 
+    image: "https://placehold.co/600x400",
+    description: "Not the phone, but just as good."
+  },
+  { 
+    id: 2, 
+    name: "Banana", 
+    price: 2.99, 
+    image: "https://placehold.co/600x400",
+    description: "Singular golden banana."
+  },
+  { 
+    id: 3, 
+    name: "Pineapple", 
+    price: 9.99, 
+    image: "https://placehold.co/600x400",
+    description: "Spikey, acidic, snack."
+  },
+  { 
+    id: 4, 
+    name: "Blueberries", 
+    price: 8.99, 
+    image: "https://placehold.co/600x400",
+    description: "3 small blueberries."
+  },
+  { 
+    id: 5, 
+    name: "Dragonfruit", 
+    price: 78.99, 
+    image: "https://placehold.co/600x400",
+    description: "The most legendary fruit in the universe."
+  },
+  { 
+    id: 6, 
+    name: "Peach", 
+    price: 1.69, 
+    image: "https://placehold.co/600x400",
+    description: "The sweetest peach from the heart of the Earth."
+  }
+]
 
 function App() {
+  const [products, setProducts] = useState(() => {
+    const savedProducts = localStorage.getItem('products');
+    return savedProducts ? JSON.parse(savedProducts) : defaultProducts
+  });
 
-  // Products
-  const products = [
-    { 
-      id: 1, 
-      name: "Apple", 
-      price: 1.99, 
-      image: "https://placehold.co/600x400",
-      description: "Not the phone, but just as good."
-    },
-    { 
-      id: 2, 
-      name: "Banana", 
-      price: 2.99, 
-      image: "https://placehold.co/600x400",
-      description: "Singular golden banana."
-    },
-    { 
-      id: 3, 
-      name: "Pineapple", 
-      price: 9.99, 
-      image: "https://placehold.co/600x400",
-      description: "Spikey, acidic, snack."
-    },
-    { 
-      id: 4, 
-      name: "Blueberries", 
-      price: 8.99, 
-      image: "https://placehold.co/600x400",
-      description: "3 small blueberries."
-    },
-    { 
-      id: 5, 
-      name: "Dragonfruit", 
-      price: 78.99, 
-      image: "https://placehold.co/600x400",
-      description: "The most legendary fruit in the universe."
-    },
-    { 
-      id: 6, 
-      name: "Peach", 
-      price: 1.69, 
-      image: "https://placehold.co/600x400",
-      description: "The sweetest peach from the heart of the Earth."
-    }
-  ];
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products)); 
+  }, [products]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("products",JSON.stringify(products)); }
+      catch {
+        console.warn('Could not save cart to localStorage:', error);
+      }
+      [products]
+    });
+
+  
 
   //cart
   //Add to Cart
@@ -80,49 +96,19 @@ function App() {
 
 
   return (
-    <div className="app">
-      <Header cartCount={cart.length} />
-      <Hero 
-        title="OnlineStore"
-        subtitle="The best produce in the market!"
-        call="Shop Now"
-      />
-      
-      <main className="main-content">
-        <h2>Featured Products</h2>
+    <BrowserRouter>
+      <div className = 'app'>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage products={products} addToCart={addToCart} />} />
+          <Route path="/product/:id" element={<ProductDetailPage products={products} addToCart={addToCart} />} />
+          <Route path="/cart" element={<CartPage products={cart} removeProduct={removeProduct} total={total} />} />
+        </Routes>
 
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            addToCart={addToCart}
-          />
-        ))}
-
-        <h2>Your Cart:</h2>
-        <div className="cart-items">
-          {/* conditional for empty cart */}
-          {cart.length === 0 ? (
-            <p className="empty-text">Your cart is empty.</p>
-          ) : (
-            <>
-              {cart.map((product)=> (
-              <CartItem
-              key={product.id}
-              product={product}
-              onDeleteProduct={removeProduct}
-              />
-            ))}
-            {/* Total with decimals */}
-            <p className="total-text">Total: ${total.toFixed(2)}</p>
-            </>
-          )}
-          
-        </div>
-        
-      </main>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

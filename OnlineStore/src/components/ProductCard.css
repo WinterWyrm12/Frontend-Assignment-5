@@ -4,7 +4,8 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     margin-bottom: 16px;
     padding: 16px;
-    width: 300px;
+    width: 50%;
+    margin:0 auto 16px auto;
 }
 
 .image {
